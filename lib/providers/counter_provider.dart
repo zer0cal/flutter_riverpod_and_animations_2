@@ -1,7 +1,8 @@
+// dart packages
 import 'dart:developer' as dev;
-
+// flutter packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+// project files
 import 'package:flutter_riverpod_and_animations_2/models/counter_model.dart';
 
 class CounterNotifier extends StateNotifier<CounterModel> {

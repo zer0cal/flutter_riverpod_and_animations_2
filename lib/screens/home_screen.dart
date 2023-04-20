@@ -8,7 +8,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    dev.log('HomeScreen.build()', name: 'home_screen.dart');
+    dev.log('HomeScreen.build()', name: 'home_screen.dart', level: 0);
 
     return Scaffold(
       body: Column(

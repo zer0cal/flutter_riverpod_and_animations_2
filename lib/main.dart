@@ -14,7 +14,7 @@ class App extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    dev.log('App.build()', name: 'main.dart');
+    dev.log('App.build()', name: 'main.dart', level: 0);
     return MaterialApp(
       title: 'Riverpod 2.0 with animations',
       initialRoute: '/home',

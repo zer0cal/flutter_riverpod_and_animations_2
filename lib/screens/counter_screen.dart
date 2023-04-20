@@ -12,7 +12,7 @@ class CounterScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    dev.log('CounterScreen.build()', name: 'counter_screen.dart');
+    dev.log('CounterScreen.build()', name: 'counter_screen.dart', level: 0);
 
     return Scaffold(
       body: Column(
