@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 // project files
+import 'package:flutter_riverpod_and_animations_2/models/counter_model.dart';
 import 'package:flutter_riverpod_and_animations_2/providers/counter_provider.dart';
 
 class CounterWidget extends ConsumerWidget {
@@ -16,23 +17,28 @@ class CounterWidget extends ConsumerWidget {
 
     final counter = ref.watch(counterProvider);
 
-    return FadeInHook(child: Center(
-      child: Text(counter.value.toString()),
-    ));
+    return FadeInHook(
+        stateNotifierProvider: counterProvider,
+        child: Center(
+          child: Text(counter.value.toString()),
+        ));
   }
 }
 
 class FadeInHook extends HookWidget {
-  const FadeInHook({Key? key, required this.child}) : super(key: key);
+  const FadeInHook(
+      {Key? key, required this.child, required this.stateNotifierProvider})
+      : super(key: key);
 
   final Widget child;
+  final StateNotifierProvider stateNotifierProvider;
 
   @override
   Widget build(BuildContext context) {
     dev.log('FadeInHook.build()', name: 'counter_widget.dart', level: 0);
 
     final animationConstroler =
-        useAnimationController(duration: const Duration(seconds: 2));
+        useAnimationController(duration: const Duration(seconds: 1));
 
     useEffect(() {
       animationConstroler.forward();
@@ -42,9 +48,14 @@ class FadeInHook extends HookWidget {
 
     useAnimation(animationConstroler);
 
-    return Opacity(
-      opacity: animationConstroler.value,
-      child: child
-    );
+    return Consumer(builder: (context, ref, widget) {
+      ref.listen(stateNotifierProvider, (previous, next) {
+        animationConstroler.reset();
+      });
+      return Opacity(
+        opacity: animationConstroler.value,
+        child: child,
+      );
+    });
   }
 }
