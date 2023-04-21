@@ -1,6 +1,6 @@
 // dart packages
 import 'dart:developer' as dev;
-// fluter packages
+// flutter packages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files

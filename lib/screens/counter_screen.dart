@@ -15,15 +15,17 @@ class CounterScreen extends ConsumerWidget {
     dev.log('CounterScreen.build()', name: 'counter_screen.dart', level: 0);
 
     return Scaffold(
-      body: Column(
-              children: [
-                const CounterWidget(),
-                TextButton(onPressed: () => ref.read(counterProvider.notifier).increment(), child: const Text('increase')),
-                TextButton(onPressed: () => ref.read(counterProvider.notifier).decrement(), child: const Text('decrease')),
-                TextButton(onPressed: () => ref.read(counterProvider.notifier).reset(), child: const Text('reset')),
-                TextButton(onPressed: () => Navigator.pop(context), child: const Text('Home')),
-              ],
-            ),
+      body: Center(
+        child: Column(
+                children: [
+                  const CounterWidget(),
+                  TextButton(onPressed: () => ref.read(counterProvider.notifier).increment(), child: const Text('increase')),
+                  TextButton(onPressed: () => ref.read(counterProvider.notifier).decrement(), child: const Text('decrease')),
+                  TextButton(onPressed: () => ref.read(counterProvider.notifier).reset(), child: const Text('reset')),
+                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('Home')),
+                ],
+              ),
+      ),
     );
   }
 }

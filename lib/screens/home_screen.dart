@@ -11,10 +11,12 @@ class HomeScreen extends StatelessWidget {
     dev.log('HomeScreen.build()', name: 'home_screen.dart', level: 0);
 
     return Scaffold(
-      body: Column(
-        children: <Widget>[
-          TextButton(onPressed: () => Navigator.pushNamed(context, '/counter'), child: const Text('Counter'))
-        ],
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            TextButton(onPressed: () => Navigator.pushNamed(context, '/counter'), child: const Text('Counter'))
+          ],
+        ),
       ),
     );
   }

@@ -6,9 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_and_animations_2/models/counter_model.dart';
 
 class CounterNotifier extends StateNotifier<CounterModel> {
-  CounterNotifier(this.ref): super(CounterModel(0)); 
+  CounterNotifier(this.ref): super(CounterModel(0));
 
-  Ref ref;
+  /// you can refer to the model using [state]
+   
+  // reference to StateNotifierProvider
+  final Ref ref;
 
   void increment() {
     dev.log('CounterNotifier.increment()', name: 'counter_provider.dart');
@@ -32,3 +35,4 @@ class CounterNotifier extends StateNotifier<CounterModel> {
 final counterProvider = StateNotifierProvider<CounterNotifier, CounterModel>((ref) {
   return CounterNotifier(ref);
 });
+
