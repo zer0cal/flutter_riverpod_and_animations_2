@@ -1,9 +1,8 @@
-// dart packages
-import 'dart:developer' as dev;
 // flutter packages
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files
-import 'package:flutter_riverpod_and_animations_2/models/counter_model.dart';
+import 'package:flutter_riverpod_and_animations_2/models/counter.dart';
+import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
 
 class CounterNotifier extends StateNotifier<CounterModel> {
   CounterNotifier(this.ref): super(CounterModel(0));
@@ -14,19 +13,19 @@ class CounterNotifier extends StateNotifier<CounterModel> {
   final Ref ref;
 
   void increment() {
-    dev.log('CounterNotifier.increment()', name: 'counter_provider.dart');
+    log.providerNotify(this, 'increment');
     state.value++;
     ref.notifyListeners();
   }
 
   void decrement() {
-    dev.log('CounterNotifier.decrement()', name: 'counter_provider.dart');
+    log.providerNotify(this, 'decrement');
     state.value--;
     ref.notifyListeners();
   }
 
   void reset() {
-    dev.log('CounterNotifier.reset()', name: 'counter_provider.dart');
+    log.providerNotify(this, 'reset');
     state.value = 0;
     ref.notifyListeners();
   }

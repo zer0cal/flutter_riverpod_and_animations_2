@@ -1,24 +1,23 @@
-// dart packages
-import 'dart:developer' as dev;
+
 // flutter packages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 // project files
-import 'package:flutter_riverpod_and_animations_2/models/counter_model.dart';
-import 'package:flutter_riverpod_and_animations_2/providers/counter_provider.dart';
+import 'package:flutter_riverpod_and_animations_2/providers/counter.dart';
+import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
 
 class CounterWidget extends ConsumerWidget {
   const CounterWidget({super.key});
 
   @override
   Widget build(context, ref) {
-    dev.log('CounterWidget.build()', name: 'counter_widget.dart', level: 0);
+    log.widgetBuild(this);
 
     final counter = ref.watch(counterProvider);
 
     return FadeInHook(
-        stateNotifierProvider: counterProvider,
+        provider: counterProvider,
         child: Center(
           child: Text(counter.value.toString()),
         ));
@@ -27,33 +26,33 @@ class CounterWidget extends ConsumerWidget {
 
 class FadeInHook extends HookWidget {
   const FadeInHook(
-      {Key? key, required this.child, required this.stateNotifierProvider})
+      {Key? key, required this.child, required this.provider})
       : super(key: key);
 
   final Widget child;
-  final StateNotifierProvider stateNotifierProvider;
+  final StateNotifierProvider provider;
 
   @override
   Widget build(BuildContext context) {
-    dev.log('FadeInHook.build()', name: 'counter_widget.dart', level: 0);
+    log.hookAnimation(this, 'fade_in');
 
-    final animationConstroler =
+    final animationConstroller =
         useAnimationController(duration: const Duration(seconds: 1));
 
     useEffect(() {
-      animationConstroler.forward();
+      animationConstroller.forward();
 
       return null;
     });
 
-    useAnimation(animationConstroler);
+    useAnimation(animationConstroller);
 
     return Consumer(builder: (context, ref, widget) {
-      ref.listen(stateNotifierProvider, (previous, next) {
-        animationConstroler.reset();
+      ref.listen(provider, (previous, next) {
+        animationConstroller.reset();
       });
       return Opacity(
-        opacity: animationConstroler.value,
+        opacity: animationConstroller.value,
         child: child,
       );
     });
