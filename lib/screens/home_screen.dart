@@ -14,7 +14,8 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: <Widget>[
             TextButton(onPressed: () => Navigator.pushNamed(context, '/counter'), child: const Text('Counter')),
-            TextButton(onPressed: () => Navigator.pushNamed(context, '/animatedbox'), child: const Text('AnimatedBox'))
+            TextButton(onPressed: () => Navigator.pushNamed(context, '/animatedbox'), child: const Text('AnimatedBox')),
+            TextButton(onPressed: () => Navigator.pushNamed(context, '/animatedlist'), child: const Text('AnimatedList'))
           ],
         ),
       ),

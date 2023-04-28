@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 // project files
-import 'package:flutter_riverpod_and_animations_2/providers/counter.dart';
+import 'package:flutter_riverpod_and_animations_2/providers/counter_provider.dart';
 import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
 
 class CounterWidget extends ConsumerWidget {
@@ -19,7 +19,7 @@ class CounterWidget extends ConsumerWidget {
     return FadeInHook(
         provider: counterProvider,
         child: Center(
-          child: Text(counter.value.toString()),
+          child: Text(counter.value.toString(), style: const TextStyle(fontSize: 30),),
         ));
   }
 }

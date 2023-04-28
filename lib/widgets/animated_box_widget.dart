@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files
 import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
-import 'package:flutter_riverpod_and_animations_2/providers/animatedbox.dart';
+import 'package:flutter_riverpod_and_animations_2/providers/animatedbox_provider.dart';
 
 class AnimatedboxWidget extends ConsumerStatefulWidget {
   const AnimatedboxWidget({super.key});
@@ -19,23 +19,9 @@ class _AnimatedboxWidgetState extends ConsumerState<AnimatedboxWidget> {
     log.widgetBuild(this);
     final size = ref.watch(sizeProvider);
 
-    // return AnimatedContainer(
-    //   duration: const Duration(seconds: 1), 
-    //   padding: const EdgeInsets.all(8.0),
-    //   width: size,
-    //   height: size,
-    //   color: Colors.amber,
-    //   curve: Curves.bounceOut,
-    //   child: Center(
-    //     child: Text(
-    //       '${size.toStringAsFixed(2)}',
-    //       style: const TextStyle(color: Colors.white, fontSize: 20),
-    //       ))
-    // );
-
     return TweenAnimationBuilder<double>(
       tween: Tween<double>(begin: size, end: size),
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 2),
       curve: Curves.bounceOut,
       builder: (context, value, child) {
         log.tweenAnimation(this, 'box_size');
