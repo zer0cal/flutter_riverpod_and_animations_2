@@ -1,4 +1,3 @@
-
 // flutter packages
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -26,7 +25,7 @@ class App extends ConsumerWidget {
         '/home': (context) => const HomeScreen(),
         '/counter': (context) => const CounterScreen(),
         '/animatedbox': (context) => const AnimatedboxScreen(),
-        '/animatedlist': (context) => AniatedListScreen(),
+        '/animatedlist': (context) => const AniatedListScreen(),
       },
     );
   }

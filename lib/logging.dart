@@ -15,3 +15,11 @@ void tweenAnimation(dynamic widget, String name) {
 void hookAnimation(dynamic widget, String name) {
   dev.log('${widget.runtimeType}.$name', name: 'widget.hook_animation');
 }
+
+void animationBuilder(dynamic widget, String name) {
+  dev.log('${widget.runtimeType}.$name', name: 'widget.animation_builder');
+}
+
+void providerListen(dynamic widget, String name) {
+  dev.log('${widget.runtimeType}.$name', name: 'provider.listen');
+}

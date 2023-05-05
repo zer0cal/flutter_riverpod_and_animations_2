@@ -3,61 +3,84 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files
 import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
-import 'package:flutter_riverpod_and_animations_2/providers/animatedlist_provider.dart';
 
 class AnimatedListItemWidget extends ConsumerStatefulWidget {
-  const AnimatedListItemWidget({super.key});
+  const AnimatedListItemWidget(
+      {super.key, required this.index, required this.onDelete, required this.child});
+
+  final Function onDelete;
+  final int index;
+  final Widget child;
 
   @override
-  ConsumerState<AnimatedListItemWidget> createState() => _AnimatedListItemWidgetState();
+  ConsumerState<AnimatedListItemWidget> createState() =>
+      _AnimatedListItemWidgetState();
 }
 
 class _AnimatedListItemWidgetState extends ConsumerState<AnimatedListItemWidget>
     with TickerProviderStateMixin {
-  late final AnimationController _opacityAnimationController  = AnimationController(
-        vsync: this, duration: const Duration(microseconds: 500));
+  // animation controllers
+  late final AnimationController _opacityAnimationController =
+      AnimationController(
+          vsync: this, duration: const Duration(milliseconds: 200));
   late final AnimationController _containerAnimationController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+      AnimationController(
+          vsync: this, duration: const Duration(milliseconds: 300));
+  // animations
+  late final Animation<double> _opacityAnimation =
+      Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
+          parent: _opacityAnimationController, curve: Curves.easeIn));
+  late final Animation<double> _heightAnimation =
+      Tween<double>(begin: 0, end: 50).animate(CurvedAnimation(
+          parent: _containerAnimationController, curve: Curves.easeIn));
 
-  late final Animation<double> _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(
-        CurvedAnimation(parent: _opacityAnimation, curve: Curves.easeIn));
-  late final Animation<double> _heightAnimation = Tween<double>(begin: 100, end: 300).animate(
-        CurvedAnimation(parent: _heightAnimation, curve: Curves.easeIn));
+  @override
+  void initState() {
+    super.initState();
+    _opacityAnimationController.forward();
+    _containerAnimationController.forward();
+  }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _opacityAnimationController.forward();
-  //   _containerAnimationController.forward();
-  // }
-
-  // @override
-  // void dispose() {
-  //   _containerAnimationController.dispose();
-  //   _opacityAnimationController.dispose();
-  //   super.dispose();
-  // }
+  @override
+  dispose() {
+    _opacityAnimationController.dispose();
+    _containerAnimationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<bool>(selfDeleteProvider, (previous, next) {
-      if (next) {
-        _opacityAnimationController.reverse();
-        _containerAnimationController.reverse();
-        // dispose();
-      }
-    });
     return AnimatedBuilder(
       animation: Listenable.merge(
           [_containerAnimationController, _opacityAnimationController]),
-      child: const Text('elo'),
       builder: (context, child) {
-        log.tweenAnimation(this, '[_opacityAnimation, _heightAnimation]');
-        return SizedBox(
-          height: 300,
+        log.animationBuilder(this, '[_opacityAnimation, _heightAnimation]');
+        return Padding(
+          padding: const EdgeInsets.all(4.0),
           child: Opacity(
             opacity: _opacityAnimation.value,
-            child: SizedBox(height: _heightAnimation.value, child: child),
+            child: Container(
+                height: _heightAnimation.value,
+                width: 200,
+                padding: const EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                    color: Colors.lime,
+                    borderRadius: BorderRadius.circular(8.0)),
+                child: Center(
+                  child: Row(
+                    children: [
+                      widget.child,
+                      Expanded(child: Container()),
+                      IconButton(
+                          onPressed: () {
+                            _opacityAnimationController.reverse();
+                            _containerAnimationController.reverse().whenComplete(() => widget.onDelete());
+                            // widget.onDelete();
+                          },
+                          icon: const Icon(Icons.delete))
+                    ],
+                  ),
+                )),
           ),
         );
       },

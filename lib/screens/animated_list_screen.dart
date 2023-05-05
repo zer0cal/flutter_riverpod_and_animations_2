@@ -4,17 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files
 import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
 import 'package:flutter_riverpod_and_animations_2/providers/animatedlist_provider.dart';
-import 'package:flutter_riverpod_and_animations_2/widgets/animated_list_item_widget.dart';
 
 class AniatedListScreen extends ConsumerWidget {
-  AniatedListScreen({super.key});
-
-  final listBuilder = ListView.builder(
-    itemCount: 1,
-    itemBuilder: (context, index) {
-      return const SizedBox(height: 400, width: 300, child: AnimatedListItemWidget());
-    },
-  );
+  const AniatedListScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,12 +17,33 @@ class AniatedListScreen extends ConsumerWidget {
         children: <Widget>[
           Row(
             children: [
-              ElevatedButton(onPressed: () => Navigator.pop(context), child: const Text('Home')),
-              ElevatedButton(onPressed: () => ref.read(selfDeleteProvider.notifier).deleted(), child: const Text('--'))
-          ],),
-          AnimatedListItemWidget()
+              ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  child: const Text('Home')),
+              ElevatedButton(
+                  onPressed: () {
+                        ref.read(modelProvider.notifier).push('name');
+                      },
+                  child: const Text('+')),
+            ],
+          ),
+          const Expanded(child: ItemListBuilder())
         ],
       ),
     );
+  }
+}
+
+class ItemListBuilder extends ConsumerWidget {
+  const ItemListBuilder({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    log.widgetBuild(this);
+    final widgets = ref.watch(widgetProvider);
+    final items = ref.watch(modelProvider);
+    return ListView(
+        children: widgets
+        );
   }
 }

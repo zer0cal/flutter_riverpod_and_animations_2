@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files
 import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
-import 'package:flutter_riverpod_and_animations_2/providers/animatedbox_provider.dart';
+import 'package:flutter_riverpod_and_animations_2/providers/animated_box_provider.dart';
 import 'package:flutter_riverpod_and_animations_2/widgets/animated_box_widget.dart';
 
 class AnimatedboxScreen extends ConsumerWidget {
