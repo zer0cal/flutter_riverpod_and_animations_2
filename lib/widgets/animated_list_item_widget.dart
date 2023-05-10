@@ -65,7 +65,9 @@ class _AnimatedListItemWidgetState extends ConsumerState<AnimatedListItemWidget>
                 padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                     color: Colors.lime,
-                    borderRadius: BorderRadius.circular(8.0)),
+                    borderRadius: BorderRadius.circular(8.0),
+                    boxShadow: [BoxShadow(color: Colors.lime.shade100, blurRadius: 4.0, spreadRadius: 4.0)]),
+                    
                 child: Center(
                   child: Row(
                     children: [
@@ -73,9 +75,9 @@ class _AnimatedListItemWidgetState extends ConsumerState<AnimatedListItemWidget>
                       Expanded(child: Container()),
                       IconButton(
                           onPressed: () {
-                            _opacityAnimationController.reverse();
-                            _containerAnimationController.reverse().whenComplete(() => widget.onDelete());
-                            // widget.onDelete();
+                            // _opacityAnimationController.reverse();
+                            // _containerAnimationController.reverse().whenComplete(() => widget.onDelete());
+                            widget.onDelete();
                           },
                           icon: const Icon(Icons.delete))
                     ],

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files
 import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
-import 'package:flutter_riverpod_and_animations_2/providers/animatedlist_provider.dart';
+import 'package:flutter_riverpod_and_animations_2/providers/animated_list_provider.dart';
+import 'package:flutter_riverpod_and_animations_2/widgets/animated_list_item_widget.dart';
 
 class AniatedListScreen extends ConsumerWidget {
   const AniatedListScreen({super.key});
@@ -40,10 +41,15 @@ class ItemListBuilder extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     log.widgetBuild(this);
-    final widgets = ref.watch(widgetProvider);
-    final items = ref.watch(modelProvider);
-    return ListView(
-        children: widgets
-        );
+    final models = ref.watch(modelProvider);
+    
+    return ListView.builder(
+        itemCount: models.length,
+        itemBuilder: (context, index) {
+          return AnimatedListItemWidget(index: index, onDelete: () {
+              ref.read(modelProvider.notifier).remove(models[index]);
+            }, child: Text('$index ${models[index].name}'));
+        },
+      );
   }
 }

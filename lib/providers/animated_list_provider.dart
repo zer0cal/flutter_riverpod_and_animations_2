@@ -28,28 +28,3 @@ class ModelNotifier extends StateNotifier<List<AnimatedItemModel>> {
     ref.notifyListeners();
   }
 }
-
-final widgetProvider = StateNotifierProvider<WidgetNotifier, List<AnimatedListItemWidget>>((ref) {
-  return WidgetNotifier(ref);
-});
-
-class WidgetNotifier extends StateNotifier<List<AnimatedListItemWidget>> {
-  WidgetNotifier(this.ref): super([]);
-
-  void add(int index, Function onDelete, Widget child) {
-    state.add(AnimatedListItemWidget(index: index, onDelete: onDelete, child: child));
-    ref.notifyListeners();
-  }
-
-  void removeAt(int index) {
-    state.removeAt(index);
-    ref.notifyListeners();
-  }
-
-  void remove(AnimatedListItemWidget widget) {
-    state.remove(widget);
-    ref.notifyListeners();
-  }
-
-  final Ref ref;
-}
