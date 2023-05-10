@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files
 import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
-import 'package:flutter_riverpod_and_animations_2/providers/animatedlist_provider.dart';
+import 'package:flutter_riverpod_and_animations_2/providers/animated_list_provider.dart';
+import 'package:flutter_riverpod_and_animations_2/widgets/animated_list_item_widget.dart';
 
 class AniatedListScreen extends ConsumerWidget {
   const AniatedListScreen({super.key});
