@@ -1,9 +1,7 @@
 // flutter packages
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // project files
 import 'package:flutter_riverpod_and_animations_2/models/animated_list_item_model.dart';
-import 'package:flutter_riverpod_and_animations_2/widgets/animated_list_item_widget.dart';
 import 'package:flutter_riverpod_and_animations_2/logging.dart' as log;
 
 
